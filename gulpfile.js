@@ -277,6 +277,25 @@ gulp.task('gae-serve', ['styles'], function () {
       admin_port: 8000,
       admin_host: '0.0.0.0'
     }));
+  browserSync({
+    proxy: '127.0.0.1:8080',
+    port: 5000,
+    open: true,
+    notify: false,
+    logPrefix: 'PSK',
+    snippetOptions: {
+      rule: {
+        match: '<span id="browser-sync-binding"></span>',
+        fn: function(snippet) {
+          return snippet;
+        }
+      }
+    }
+  });
+  gulp.watch(['app/**/*.html', '!app/bower_components/**/*.html'], reload);
+  gulp.watch(['app/styles/**/*.css'], ['styles', reload]);
+  gulp.watch(['app/scripts/**/*.js'], reload);
+  gulp.watch(['app/images/**/*'], reload);
 });
 
 //Set up GAE local development server serving from dist
@@ -288,6 +307,25 @@ gulp.task('gae-serve:dist', ['default'], function () {
       admin_port: 8000,
       admin_host: '0.0.0.0'
     }));
+  browserSync({
+    proxy: '127.0.0.1:8080',
+    port: 5000,
+    open: true,
+    notify: false,
+    logPrefix: 'PSK',
+    snippetOptions: {
+      rule: {
+        match: '<span id="browser-sync-binding"></span>',
+        fn: function(snippet) {
+          return snippet;
+        }
+      }
+    }
+  });
+  gulp.watch(['app/**/*.html', '!app/bower_components/**/*.html'], reload);
+  gulp.watch(['app/styles/**/*.css'], ['styles', reload]);
+  gulp.watch(['app/scripts/**/*.js'], reload);
+  gulp.watch(['app/images/**/*'], reload);
 });
 
 // Build production files, the default task
