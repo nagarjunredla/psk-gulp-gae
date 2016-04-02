@@ -28,6 +28,7 @@ var historyApiFallback = require('connect-history-api-fallback');
 var packageJson = require('./package.json');
 var crypto = require('crypto');
 var ensureFiles = require('./tasks/ensure-files.js');
+var gae = require('gulp-gae');
 
 // var ghPages = require('gulp-gh-pages');
 
@@ -265,6 +266,28 @@ gulp.task('serve:dist', ['default'], function() {
     server: dist(),
     middleware: [historyApiFallback()]
   });
+});
+
+//Set up GAE local development server
+gulp.task('gae-serve', ['styles'], function () {
+  gulp.src('app/app.yaml')
+    .pipe(gae('dev_appserver.py', [], {
+      port: 8080,
+      host: '0.0.0.0',
+      admin_port: 8000,
+      admin_host: '0.0.0.0'
+    }));
+});
+
+//Set up GAE local development server serving from dist
+gulp.task('gae-serve:dist', ['default'], function () {
+  gulp.src('dist/app.yaml')
+    .pipe(gae('dev_appserver.py', [], {
+      port: 8080,
+      host: '0.0.0.0',
+      admin_port: 8000,
+      admin_host: '0.0.0.0'
+    }));
 });
 
 // Build production files, the default task
