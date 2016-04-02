@@ -1,3 +1,5 @@
+PSK with gulp+gae support. Put it up for personal convenience. You can find the [original PSK here](https://github.com/PolymerElements/polymer-starter-kit).
+
 ![](https://cloud.githubusercontent.com/assets/110953/7877439/6a69d03e-0590-11e5-9fac-c614246606de.png)
 ## Polymer Starter Kit
 
